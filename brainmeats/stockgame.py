@@ -190,7 +190,7 @@ class Stockgame(Dendrite):
             cash = drinker.cash
 
             for p in drinker.positions:
-                stock = Broker(p.symbol)
+                stock = Broker(p.symbol.upper())
                 if p.type == 'long':
                     net = p.quantity * stock.price
                 else:
@@ -250,7 +250,7 @@ class Stockgame(Dendrite):
 
             total = 0
             for p in drinker.positions:
-                stock = Broker(p.symbol)
+                stock = Broker(p.symbol.upper())
 
                 if p.type == 'long':
                     net = p.quantity * (stock.price - p.price)
@@ -262,7 +262,7 @@ class Stockgame(Dendrite):
                     continue
 
                 self.chat("%8s %10s %10d %10.02f %10.02f %10.02f" %
-                          (p.type, p.symbol, p.quantity, p.price, stock.price,
+                          (p.type, stock.symbol, p.quantity, p.price, stock.price,
                            net))
 
                 total += net
